@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<!DOCTYPE project>
+<project>
+    <property environment="env"/>
+    <property name="artifact.output.path" value="${artifact.output.path}"/>
+
+    <target name="before">
+        <tstamp/>
+        <condition property="build.number" value="${build.number}" else="dev-${DSTAMP}-${TSTAMP}">
+            <isset property="build.number"/>
+        </condition>
+        <copydir dest="${artifact.output.path}/res" src="resources"/>
+        <replace file="${artifact.output.path}/res/plugin.yml" token="$VERSION$" value="${build.number}"
+                 failonnoreplacements="false"/>
+    </target>
+
+    <target name="after">
+    </target>
+</project>
