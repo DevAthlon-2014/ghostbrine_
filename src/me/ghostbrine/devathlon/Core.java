@@ -34,13 +34,10 @@ public class Core extends JavaPlugin {
         effectsManager.load();
     }
 
-    public void spawnParticleAt(int id, Location loc, int count, float data) {
+    public void spawnParticleAt(org.bukkit.Effect effect, int data, Location loc, float speed, int count) {
         PacketContainer packet = protocolManager.createPacket(PacketType.Play.Server.WORLD_PARTICLES);
-        packet.getIntegers()
-                .write(0, id)
-                .write(1, count);
-        packet.getBooleans()
-                .write(0, true);
+        packet.getStrings()
+                .write(0, effect.getName());
         packet.getFloat()
                 .write(0, (float) loc.getX())
                 .write(1, (float) loc.getY())
@@ -48,11 +45,13 @@ public class Core extends JavaPlugin {
                 .write(3, 0F)
                 .write(4, 0F)
                 .write(5, 0F)
-                .write(7, data);
-        packet.getIntegerArrays()
-                .write(0, new int[0]);
+                .write(7, speed);
+        packet.getIntegers()
+                .write(0, count);
         protocolManager.broadcastServerPacket(packet);
     }
+
+
 
     public EffectsManager getEffectsManager() {
         return effectsManager;

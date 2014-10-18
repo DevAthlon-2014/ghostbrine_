@@ -11,10 +11,10 @@ import java.util.Set;
 public class EffectsManager {
 
     private int task;
-    private Set<Effect> runningEffects;
+    private Set<Gun> runningGuns;
 
     public void load() {
-        runningEffects = new HashSet<>();
+        runningGuns = new HashSet<>();
         task = Bukkit.getScheduler().scheduleSyncRepeatingTask(Core.getInst(), new Runnable() {
             @Override
             public void run() {
@@ -24,28 +24,28 @@ public class EffectsManager {
     }
 
     public void unload() {
-        runningEffects = null;
+        runningGuns = null;
         Bukkit.getScheduler().cancelTask(task);
     }
 
     public void tick() {
-        for (Effect effect : runningEffects) {
-            effect.tick();
+        for (Gun gun : runningGuns) {
+            gun.tick();
         }
     }
 
     public void playerShoot(Player player, GunType type) {
         System.out.println("shoot " + type.name());
-        Effect effect = null;
+        Gun gun = null;
         switch (type) {
             case WATER:
-                effect = new WaterGun(player);
+                gun = new WaterGun(player);
                 break;
             case FIRE:
-                effect = new FireGun(player);
+                gun = new FireGun(player);
                 break;
         }
-        effect.spawn(player.getEyeLocation(), player.getEyeLocation().getDirection());
-        runningEffects.add(effect);
+        gun.spawn(player.getEyeLocation(), player.getEyeLocation().getDirection());
+        runningGuns.add(gun);
     }
 }

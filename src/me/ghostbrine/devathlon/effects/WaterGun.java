@@ -1,12 +1,12 @@
 package me.ghostbrine.devathlon.effects;
 
 import me.ghostbrine.devathlon.Core;
-import me.ghostbrine.devathlon.Effect;
+import me.ghostbrine.devathlon.Gun;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-public class WaterGun extends Effect {
+public class WaterGun extends Gun {
 
     public WaterGun(Player player) {
         super(player);
