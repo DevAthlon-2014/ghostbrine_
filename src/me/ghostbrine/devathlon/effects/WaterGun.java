@@ -18,20 +18,24 @@ public class WaterGun extends Gun {
 
     private static final double speed = 0.3d;
 
-    private Map<Location, Vector> dirs = new HashMap<>();
+    private Map<Vector, Location> dirs = new HashMap<>();
 
     @Override
     public void spawn(Location loc, Vector direction) {
         for (int i = 0; i < 10; i++) {
-
+            Vector x = direction.clone().add(new Vector(0.5 * Core.rand.nextDouble() - 0.25, 0.5 * Core.rand.nextDouble() - 0.25, 0.5 * Core.rand.nextDouble() - 0.25));
+            dirs.put(x, loc.clone());
         }
     }
 
     @Override
     public void tick() {
-        for (int i = 0; i < 4; i++) {
-            currLoc = currLoc.add(direction);
-            Core.getInst().spawnParticleAt(WrapperPlayServerWorldParticles.ParticleEffect.DRIP_WATER, currLoc, 1, 1);
+        for (Map.Entry<Vector, Location> e : dirs.entrySet()) {
+            Location loc = e.getValue();
+            for (int i = 0; i < 4; i++) {
+                loc = loc.add(e.getKey());
+                Core.getInst().spawnParticleAt(WrapperPlayServerWorldParticles.ParticleEffect.DRIP_WATER, loc, 1, 1);
+            }
         }
     }
 
