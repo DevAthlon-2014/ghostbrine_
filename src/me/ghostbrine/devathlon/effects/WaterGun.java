@@ -3,6 +3,7 @@ package me.ghostbrine.devathlon.effects;
 import com.comphenix.packetwrapper.WrapperPlayServerWorldParticles;
 import me.ghostbrine.devathlon.Core;
 import me.ghostbrine.devathlon.Gun;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -45,6 +46,10 @@ public class WaterGun extends Gun {
             if (now == 0) continue;
             waterPoints.put(loc, now - 1);
         }
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (!player.equals(getPlayer())) checkPlayer(player, player.getLocation());
+        }
     }
 
     @Override
@@ -54,6 +59,7 @@ public class WaterGun extends Gun {
 
     @Override
     public void checkPlayer(Player player, Location to) {
+        if (player.equals(getPlayer())) return;
         for (Location loc : waterPoints.keySet()) {
             if (loc.distance(to.add(0, 0.3, 0)) < 1) {
                 player.damage(2, player);
