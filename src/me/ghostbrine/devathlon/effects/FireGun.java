@@ -58,7 +58,7 @@ public class FireGun extends Gun {
         if (player.equals(getPlayer())) return;
         for (Location loc : firePoints.keySet()) {
             if (loc.distance(to.add(0, 0.3, 0)) < 1) {
-                player.setFireTicks(100);
+                player.setFireTicks(300);
             }
         }
     }
