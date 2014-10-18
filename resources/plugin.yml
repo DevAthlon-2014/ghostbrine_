@@ -1,4 +1,4 @@
-name: xxx
+name: StarWars
 version: $VERSION$
 main: me.ghostbrine.devathlon.Core
 depend: [ProtocolLib]
