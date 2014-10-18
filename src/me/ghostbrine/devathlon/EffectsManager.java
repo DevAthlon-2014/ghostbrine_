@@ -46,5 +46,6 @@ public class EffectsManager {
                 break;
         }
         effect.spawn(player.getEyeLocation(), player.getEyeLocation().getDirection());
+        runningEffects.add(effect);
     }
 }
