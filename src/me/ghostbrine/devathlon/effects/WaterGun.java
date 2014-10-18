@@ -62,7 +62,8 @@ public class WaterGun extends Gun {
         if (player.equals(getPlayer())) return;
         for (Location loc : waterPoints.keySet()) {
             if (loc.distance(to.add(0, 0.3, 0)) < 1) {
-                player.damage(2, player);
+                player.damage(5, player);
+                player.setFireTicks(0);
             }
         }
     }
