@@ -24,7 +24,7 @@ public class WaterGun extends Gun {
     public void spawn(Location loc, Vector direction) {
         for (int i = 0; i < 10; i++) {
             Vector x = direction.clone().add(new Vector(0.5 * Core.rand.nextDouble() - 0.25, 0.5 * Core.rand.nextDouble() - 0.25, 0.5 * Core.rand.nextDouble() - 0.25));
-            dirs.put(x, loc.clone());
+            dirs.put(x.normalize().multiply(speed), loc.clone());
         }
     }
 
@@ -42,5 +42,10 @@ public class WaterGun extends Gun {
     @Override
     public int getMaxSteps() {
         return 100;
+    }
+
+    @Override
+    public void checkPlayer(Player player, Location to) {
+
     }
 }

@@ -3,6 +3,7 @@ package me.ghostbrine.devathlon;
 import me.ghostbrine.devathlon.effects.FireGun;
 import me.ghostbrine.devathlon.effects.WaterGun;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.HashSet;
@@ -50,5 +51,11 @@ public class EffectsManager {
         }
         gun.spawn(player.getEyeLocation(), player.getEyeLocation().getDirection());
         runningGuns.add(gun);
+    }
+
+    public void checkPlayer(Player player, Location to) {
+        for (Gun gun : runningGuns) {
+            gun.checkPlayer(player, to);
+        }
     }
 }
