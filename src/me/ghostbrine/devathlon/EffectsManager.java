@@ -1,9 +1,11 @@
 package me.ghostbrine.devathlon;
 
 import me.ghostbrine.devathlon.effects.FireGun;
+import me.ghostbrine.devathlon.effects.Sword;
 import me.ghostbrine.devathlon.effects.WaterGun;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.util.HashSet;
@@ -37,6 +39,12 @@ public class EffectsManager {
             }
         }
         runningGuns.removeAll(done);
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (player.getItemInHand() != null && player.getItemInHand().getType() == Material.STICK) {
+                Sword.spawnPlayer(player);
+            }
+        }
     }
 
     public void playerShoot(Player player, GunType type) {
