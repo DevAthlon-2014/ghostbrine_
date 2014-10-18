@@ -1,5 +1,6 @@
 package me.ghostbrine.devathlon.effects;
 
+import com.comphenix.packetwrapper.WrapperPlayServerWorldParticles;
 import me.ghostbrine.devathlon.Core;
 import me.ghostbrine.devathlon.Gun;
 import org.bukkit.Location;
@@ -27,6 +28,6 @@ public class WaterGun extends Gun {
     @Override
     public void tick() {
         currLoc = currLoc.add(direction);
-        Core.getInst().spawnParticleAt(6 /* SPLASH */, currLoc, 1, 0);
+        Core.getInst().spawnParticleAt(WrapperPlayServerWorldParticles.ParticleEffect.DRIP_WATER, currLoc, 1, 1);
     }
 }

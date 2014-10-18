@@ -1,11 +1,12 @@
 package me.ghostbrine.devathlon;
 
-import com.comphenix.protocol.PacketType;
+import com.comphenix.packetwrapper.WrapperPlayServerWorldParticles;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
-import com.comphenix.protocol.events.PacketContainer;
 import me.ghostbrine.devathlon.listen.GameListener;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Core extends JavaPlugin {
@@ -34,23 +35,19 @@ public class Core extends JavaPlugin {
         effectsManager.load();
     }
 
-    public void spawnParticleAt(org.bukkit.Effect effect, int data, Location loc, float speed, int count) {
-        PacketContainer packet = protocolManager.createPacket(PacketType.Play.Server.WORLD_PARTICLES);
-        packet.getStrings()
-                .write(0, effect.getName());
-        packet.getFloat()
-                .write(0, (float) loc.getX())
-                .write(1, (float) loc.getY())
-                .write(2, (float) loc.getZ())
-                .write(3, 0F)
-                .write(4, 0F)
-                .write(5, 0F)
-                .write(7, speed);
-        packet.getIntegers()
-                .write(0, count);
-        protocolManager.broadcastServerPacket(packet);
+    public void spawnParticleAt(WrapperPlayServerWorldParticles.ParticleEffect effect, Location loc, float speed, int count) {
+        WrapperPlayServerWorldParticles packet = new WrapperPlayServerWorldParticles();
+        packet.setLocation(loc);
+        packet.setNumberOfParticles(count);
+        packet.setOffsetX(0);
+        packet.setOffsetY(0);
+        packet.setOffsetZ(0);
+        packet.setParticleSpeed(speed);
+        packet.setParticleEffect(effect);
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            packet.sendPacket(player);
+        }
     }
-
 
 
     public EffectsManager getEffectsManager() {
