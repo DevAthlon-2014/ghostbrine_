@@ -10,6 +10,8 @@ public class Core extends JavaPlugin {
         return instance;
     }
 
+    private EffectsManager effectsManager;
+
     @Override
     public void onLoad() {
         instance = this;
@@ -17,6 +19,6 @@ public class Core extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
+        effectsManager = new EffectsManager();
     }
 }
