@@ -4,6 +4,7 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.PacketContainer;
+import me.ghostbrine.devathlon.listen.GameListener;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -27,6 +28,10 @@ public class Core extends JavaPlugin {
     @Override
     public void onEnable() {
         effectsManager = new EffectsManager();
+
+        getServer().getPluginManager().registerEvents(new GameListener(), this);
+
+        effectsManager.load();
     }
 
     public void spawnParticleAt(int id, Location loc, int count, float data) {
