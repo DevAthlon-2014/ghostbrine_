@@ -1,3 +1,4 @@
 name: xxx
 version: $VERSION$
-main: me.ghostbrine.devathlon.
+main: me.ghostbrine.devathlon.Core
+depend: [ProtocolLib]
