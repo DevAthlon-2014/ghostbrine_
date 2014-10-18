@@ -35,6 +35,7 @@ public class EffectsManager {
     }
 
     public void playerShoot(Player player, GunType type) {
+        System.out.println("shoot " + type.name());
         Effect effect = null;
         switch (type) {
             case WATER:

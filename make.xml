@@ -15,6 +15,6 @@
     </target>
 
     <target name="after">
-        
+        <copy todir="../../Server/Test/plugins" file="out/Devathlon.jar" overwrite="true"/>
     </target>
 </project>
