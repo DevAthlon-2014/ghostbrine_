@@ -29,13 +29,16 @@ public class EffectsManager {
     }
 
     public void tick() {
+        Set<Gun> done = new HashSet<>();
         for (Gun gun : runningGuns) {
-            gun.tick();
+            if (gun.step()) {
+                done.add(gun);
+            }
         }
+        runningGuns.removeAll(done);
     }
 
     public void playerShoot(Player player, GunType type) {
-        System.out.println("shoot " + type.name());
         Gun gun = null;
         switch (type) {
             case WATER:

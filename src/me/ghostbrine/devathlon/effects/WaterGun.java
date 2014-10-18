@@ -7,27 +7,36 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class WaterGun extends Gun {
 
     public WaterGun(Player player) {
         super(player);
     }
 
-    private static final double speed = 0.5d;
+    private static final double speed = 0.3d;
 
-    private Location currLoc;
-    private Vector direction;
+    private Map<Location, Vector> dirs = new HashMap<>();
 
     @Override
     public void spawn(Location loc, Vector direction) {
-        currLoc = loc;
-        this.direction = direction.normalize().multiply(speed);
+        for (int i = 0; i < 10; i++) {
 
+        }
     }
 
     @Override
     public void tick() {
-        currLoc = currLoc.add(direction);
-        Core.getInst().spawnParticleAt(WrapperPlayServerWorldParticles.ParticleEffect.DRIP_WATER, currLoc, 1, 1);
+        for (int i = 0; i < 4; i++) {
+            currLoc = currLoc.add(direction);
+            Core.getInst().spawnParticleAt(WrapperPlayServerWorldParticles.ParticleEffect.DRIP_WATER, currLoc, 1, 1);
+        }
+    }
+
+    @Override
+    public int getMaxSteps() {
+        return 100;
     }
 }

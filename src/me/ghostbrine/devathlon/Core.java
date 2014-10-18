@@ -9,8 +9,11 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Random;
+
 public class Core extends JavaPlugin {
 
+    public static final Random rand = new Random();
     private static Core instance;
 
     public static Core getInst() {
