@@ -19,6 +19,7 @@ public class WaterGun extends Gun {
     private static final double speed = 0.3d;
 
     private Map<Vector, Location> dirs = new HashMap<>();
+    private Map<Location, Integer> waterPoints = new HashMap<>();
 
     @Override
     public void spawn(Location loc, Vector direction) {
@@ -36,6 +37,13 @@ public class WaterGun extends Gun {
                 loc = loc.add(e.getKey());
                 Core.getInst().spawnParticleAt(WrapperPlayServerWorldParticles.ParticleEffect.DRIP_WATER, loc, 1, 1);
             }
+            waterPoints.put(loc, 300);
+
+        }
+        for (Location loc : waterPoints.keySet()) {
+            int now = waterPoints.get(loc);
+            if (now == 0) continue;
+            waterPoints.put(loc, now - 1);
         }
     }
 
@@ -46,6 +54,10 @@ public class WaterGun extends Gun {
 
     @Override
     public void checkPlayer(Player player, Location to) {
-
+        for (Location loc : waterPoints.keySet()) {
+            if (loc.distance(to.add(0, 0.3, 0)) < 1) {
+                player.damage(2, player);
+            }
+        }
     }
 }
