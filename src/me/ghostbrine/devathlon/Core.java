@@ -44,5 +44,12 @@ public class Core extends JavaPlugin {
                 .write(4, 0F)
                 .write(5, 0F)
                 .write(7, data);
+        packet.getIntegerArrays()
+                .write(0, new int[0]);
+        protocolManager.broadcastServerPacket(packet);
+    }
+
+    public EffectsManager getEffectsManager() {
+        return effectsManager;
     }
 }
